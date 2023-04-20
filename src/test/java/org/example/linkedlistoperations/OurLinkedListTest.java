@@ -32,19 +32,20 @@ class OurLinkedListTest {
 
     }
 
-//    @Test
-//    void invertListTest() {
-//        Integer[] array = new Integer[]{1, 2, 3, 4, -5, 6};
-//        OurLinkedList linkedListTest = new OurLinkedList(array);
-//        linkedListTest.invertList();
-//        assertArrayEquals(linkedListTest.fromListToArray(), new Integer[]{6, -5, 4, 3, 2, 1});
-//    }
+    @Test
+    void invertListTest() {
+        Integer[] array = new Integer[]{1, 2, 3, 4, -5, 6};
+        OurLinkedList linkedListTest = new OurLinkedList(array);
+        OurLinkedList invertedLinkedListTest = linkedListTest.invertList();
+        assertArrayEquals(invertedLinkedListTest.fromListToArray(), new Integer[]{6, -5, 4, 3, 2, 1});
+    }
 
-//    @Test
-//    void invertNullListTest() {
-//        OurLinkedList linkedListTest = new OurLinkedList(null);
-//        assertFalse(linkedListTest.invertList());
-//    }
+    @Test
+    void invertNullListTest() {
+        OurLinkedList linkedListTest = new OurLinkedList(null);
+        OurLinkedList invertedLinkedListTest = linkedListTest.invertList();
+        assertNull(invertedLinkedListTest.getElement());
+    }
 
     @Test
     void emptyArrayListConstructTest() {

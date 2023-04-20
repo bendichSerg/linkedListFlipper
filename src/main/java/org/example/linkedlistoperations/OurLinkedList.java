@@ -71,6 +71,7 @@ public class OurLinkedList {
         ListElement insertedEl = new ListElement(element, this.element, this.element.nextPtr);
         this.element.nextPtr = insertedEl;
         this.element = insertedEl;
+        this.size++;
     }
 
 
@@ -78,6 +79,7 @@ public class OurLinkedList {
         ListElement insertedEl = new ListElement(element, this.element.firstPtr, this.element);
         this.element.firstPtr = insertedEl;
         this.element = insertedEl;
+        this.size++;
     }
 
 
