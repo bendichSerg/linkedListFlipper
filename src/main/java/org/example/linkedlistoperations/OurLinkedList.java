@@ -42,8 +42,23 @@ public class OurLinkedList {
         this.element.firstPtr = null;
     }
 
+
+    public Integer[] fromListToArray(){
+        Integer[] array = new Integer[getSize()];
+        goBeginning();
+        int i = 0;
+        do{
+            array[i++] = getElement();
+        } while (next());
+        return array;
+    }
+
     public Integer getElement() {
         return this.element.data;
+    }
+
+    public Integer getSize() {
+        return this.size;
     }
 
     public void setElement(Integer element) {
