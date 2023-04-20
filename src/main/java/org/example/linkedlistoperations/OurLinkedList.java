@@ -24,23 +24,14 @@ public class OurLinkedList {
     }
 
     public OurLinkedList(Integer[] array) {
+        this.element = new ListElement(null, null, null);
         if (array == null || array.length == 0) {
-            this.element = new ListElement(null, null, null);
-            ;
             return;
         }
-        addFirstElement(array[0]);
-        for (int i = 1; i < array.length; ++i, ++this.size) {
+        for (int i = 0; i < array.length; ++i, ++this.size) {
             addNext(array[i]);
         }
         goBeginning();
-    }
-
-    private void addFirstElement(Integer element) {
-        this.element = new ListElement(null, null, null);
-        addNext(element);
-        ++this.size;
-        this.element.firstPtr = null;
     }
 
 
@@ -96,30 +87,11 @@ public class OurLinkedList {
         if (isEmpty()) {
             return invertedLinkedList;
         }
-        invertedLinkedList.addNext(this.element.data);
-        invertedLinkedList.setFirstPtr(null);
-        while (before()) {
+        do {
             invertedLinkedList.addNext(this.element.data);
-        }
+        } while (before() && this.element.data != null);
         return invertedLinkedList;
     }
-
-    public ListElement getNextPtr() {
-        return this.element.nextPtr;
-    }
-
-    public ListElement getFirstPtr() {
-        return this.element.firstPtr;
-    }
-
-    public void setNextPtr(ListElement ptr) {
-        this.element.nextPtr = ptr;
-    }
-
-    public void setFirstPtr(ListElement ptr) {
-        this.element.firstPtr = ptr;
-    }
-
 
     public void goEnd() {
         while (next()) {
@@ -129,6 +101,7 @@ public class OurLinkedList {
     public void goBeginning() {
         while (before()) {
         }
+        next();
     }
 
 
