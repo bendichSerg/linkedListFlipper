@@ -25,7 +25,8 @@ public class OurLinkedList {
 
     public OurLinkedList(Integer[] array) {
         if (array == null || array.length == 0) {
-            this.element = new ListElement(null, null, null);;
+            this.element = new ListElement(null, null, null);
+            ;
             return;
         }
         addFirstElement(array[0]);
@@ -43,11 +44,11 @@ public class OurLinkedList {
     }
 
 
-    public Integer[] fromListToArray(){
+    public Integer[] fromListToArray() {
         Integer[] array = new Integer[getSize()];
         goBeginning();
         int i = 0;
-        do{
+        do {
             array[i++] = getElement();
         } while (next());
         return array;
@@ -89,20 +90,36 @@ public class OurLinkedList {
     }
 
 
-    public boolean invertList() {
+    public OurLinkedList invertList() {
+        OurLinkedList invertedLinkedList = new OurLinkedList();
         goEnd();
         if (isEmpty()) {
-            return false;
+            return invertedLinkedList;
         }
-        ListElement tmpEl;
-        do {
-            tmpEl = this.element.nextPtr;
-            this.element.nextPtr = this.element.firstPtr;
-            this.element.firstPtr = tmpEl;
-        } while (next());
-
-        return true;
+        invertedLinkedList.addNext(this.element.data);
+        invertedLinkedList.setFirstPtr(null);
+        while (before()) {
+            invertedLinkedList.addNext(this.element.data);
+        }
+        return invertedLinkedList;
     }
+
+    public ListElement getNextPtr() {
+        return this.element.nextPtr;
+    }
+
+    public ListElement getFirstPtr() {
+        return this.element.firstPtr;
+    }
+
+    public void setNextPtr(ListElement ptr) {
+        this.element.nextPtr = ptr;
+    }
+
+    public void setFirstPtr(ListElement ptr) {
+        this.element.firstPtr = ptr;
+    }
+
 
     public void goEnd() {
         while (next()) {

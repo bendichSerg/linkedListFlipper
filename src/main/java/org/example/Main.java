@@ -8,7 +8,7 @@ public class Main {
         OurLinkedList ourLinkedList = new OurLinkedList(array);
 
         ourLinkedList.printList();
-        ourLinkedList.invertList();
-        ourLinkedList.printList();
+        OurLinkedList invertedList = ourLinkedList.invertList();
+        invertedList.printList();
     }
 }
