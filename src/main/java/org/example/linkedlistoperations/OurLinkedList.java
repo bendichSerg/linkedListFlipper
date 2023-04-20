@@ -25,7 +25,7 @@ public class OurLinkedList {
 
     public OurLinkedList(Integer[] array) {
         if (array == null || array.length == 0) {
-            this.element = null;
+            this.element = new ListElement(null, null, null);;
             return;
         }
         addFirstElement(array[0]);

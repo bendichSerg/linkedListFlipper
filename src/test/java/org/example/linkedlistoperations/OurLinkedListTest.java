@@ -33,11 +33,22 @@ class OurLinkedListTest {
     }
 
     @Test
-    void invertList() {
+    void invertListTest() {
         Integer[] array = new Integer[]{1, 2, 3, 4, -5, 6};
         OurLinkedList linkedListTest = new OurLinkedList(array);
         linkedListTest.invertList();
         assertArrayEquals(linkedListTest.fromListToArray(), new Integer[]{6, -5, 4, 3, 2, 1});
+    }
 
+    @Test
+    void invertNullListTest() {
+        OurLinkedList linkedListTest = new OurLinkedList(null);
+        assertFalse(linkedListTest.invertList());
+    }
+
+    @Test
+    void emptyArrayListConstructTest() {
+        OurLinkedList linkedListTest = new OurLinkedList(null);
+        assertEquals(linkedListTest.getSize(), 0);
     }
 }
