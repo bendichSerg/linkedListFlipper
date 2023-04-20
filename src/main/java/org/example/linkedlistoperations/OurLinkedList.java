@@ -19,18 +19,27 @@ public class OurLinkedList {
 
     }
 
-    OurLinkedList() {
-        this.element = null;
+    public OurLinkedList() {
+        this.element = new ListElement(null, null, null);
     }
 
-
     public OurLinkedList(Integer[] array) {
-        this.element = new ListElement(null, null, null);
-        for (int i = 0; i < array.length; ++i, ++this.size) {
+        if (array == null || array.length == 0) {
+            this.element = null;
+            return;
+        }
+        addFirstElement(array[0]);
+        for (int i = 1; i < array.length; ++i, ++this.size) {
             addNext(array[i]);
         }
         goBeginning();
-        next();
+    }
+
+    private void addFirstElement(Integer element) {
+        this.element = new ListElement(null, null, null);
+        addNext(element);
+        ++this.size;
+        this.element.firstPtr = null;
     }
 
     public Integer getElement() {
@@ -77,9 +86,6 @@ public class OurLinkedList {
             this.element.firstPtr = tmpEl;
         } while (next());
 
-        before();
-        this.element.nextPtr = null;
-
         return true;
     }
 
@@ -90,11 +96,6 @@ public class OurLinkedList {
 
     public void goBeginning() {
         while (before()) {
-        }
-        if (this.element.data != null) {
-            this.element.firstPtr = new ListElement(null, null, this.element);
-        } else {
-            next();
         }
     }
 
