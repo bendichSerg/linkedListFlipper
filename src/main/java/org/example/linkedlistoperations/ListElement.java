@@ -40,7 +40,9 @@ public class ListElement {
             System.out.print(head.getData() + " ");
             head = next(head);
         }
-        System.out.print(head.getData() + " ");
+        if (head.getData() != null) {
+            System.out.print(head.getData() + " ");
+        }
 
         System.out.println();
     }
@@ -52,18 +54,25 @@ public class ListElement {
         return node;
     }
 
+    public static ListElement addFirst(Integer element, ListElement head) {
+        ListElement node = new ListElement(element, null, head);
+        head.setFirstPtr(node);
+        return node;
+    }
+
 
     public static ListElement invertList(ListElement head) {
         ListElement invertedListHead = new ListElement();
-        head = goEnd(head);
         do {
-            invertedListHead = addLast(head.getData(), invertedListHead);
-            head = before(head);
-        } while (head.getFirstPtr() != null);
+            invertedListHead = addFirst(head.getData(), invertedListHead);
+            head = next(head);
+        } while (head.getNextPtr() != null);
+        invertedListHead = addFirst(head.getData(), invertedListHead);
+
         return invertedListHead;
     }
 
-    public static ListElement goEnd(ListElement head) {
+    public ListElement goEnd(ListElement head) {
         while (head.getNextPtr() != null) {
             head = next(head);
         }
@@ -74,7 +83,9 @@ public class ListElement {
         while (head.getFirstPtr() != null) {
             head = before(head);
         }
-        head = next(head);
+        if (head.getData() == null) {
+            head = next(head);
+        }
         return head;
     }
 
