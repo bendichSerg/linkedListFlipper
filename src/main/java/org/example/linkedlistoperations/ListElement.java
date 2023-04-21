@@ -19,76 +19,81 @@ public class ListElement {
         this.nextPtr = nextPtr;
     }
 
+    ListElement(Integer data) {
+        this.data = data;
+        this.firstPtr = null;
+        this.nextPtr = null;
+    }
+
+
     public static ListElement constructListElement(Integer[] array) {
         if (array == null || array.length == 0) {
             return new ListElement();
         }
-        ListElement head = new ListElement();
+        ListElement head = null;
+        ListElement tail = null;
         for (int i = 0; i < array.length; ++i) {
-            head = addLast(array[i], head);
+            ListElement node = new ListElement();
+            node.setData(array[i]);
+            if (head == null) {
+                head = node;
+            } else {
+                tail.addLast(node, tail);
+            }
+            tail = node;
         }
-        return goBeginning(head);
+        return head;
     }
 
 
     public void printList(ListElement head) {
-        head = goBeginning(head);
-        if (head.getData() == null) {
-            return;
-        }
-        while (head.getNextPtr() != null) {
-            System.out.print(head.getData() + " ");
-            head = next(head);
-        }
-        if (head.getData() != null) {
-            System.out.print(head.getData() + " ");
-        }
+        ListElement tail = head;
+        do {
+            System.out.print(tail.getData() + " ");
+            if (tail.getNextPtr() == null) {
+                break;
+            }
+            tail = next(tail);
+        } while (true);
+
 
         System.out.println();
     }
 
 
-    public static ListElement addLast(Integer element, ListElement head) {
-        ListElement node = new ListElement(element, head, null);
-        head.setNextPtr(node);
-        return node;
+    public void addLast(ListElement node, ListElement tail) {
+        node.setFirstPtr(tail);
+        this.nextPtr = node;
     }
 
-    public static ListElement addFirst(Integer element, ListElement head) {
-        ListElement node = new ListElement(element, null, head);
-        head.setFirstPtr(node);
-        return node;
+    public void addFirst(ListElement node, ListElement tail) {
+        node.setNextPtr(tail);
+        this.firstPtr = node;
     }
 
 
     public static ListElement invertList(ListElement head) {
-        ListElement invertedListHead = new ListElement();
-        while (head.getNextPtr() != null) {
-            invertedListHead = addFirst(head.getData(), invertedListHead);
-            head = next(head);
-        }
-        invertedListHead = addFirst(head.getData(), invertedListHead);
+        ListElement invertedTail = null;
+        ListElement invertedHead = null;
+        ListElement tail = head;
 
-        return invertedListHead;
+        do {
+            ListElement node = new ListElement(tail.getData());
+            if (invertedHead == null) {
+                invertedHead = node;
+            } else {
+                invertedTail.addFirst(node, invertedTail);
+            }
+            invertedTail = node;
+
+            if (tail.getNextPtr() == null) {
+                break;
+            }
+            tail = next(tail);
+        } while (true);
+
+        return invertedTail;
     }
-
-    public ListElement goEnd(ListElement head) {
-        while (head.getNextPtr() != null) {
-            head = next(head);
-        }
-        return head;
-    }
-
-    public static ListElement goBeginning(ListElement head) {
-        while (head.getFirstPtr() != null) {
-            head = before(head);
-        }
-        if (head.getData() == null) {
-            head = next(head);
-        }
-        return head;
-    }
-
 
     public static ListElement next(ListElement head) {
         return head.getNextPtr() == null ? head : head.getNextPtr();
