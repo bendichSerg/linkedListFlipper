@@ -63,10 +63,10 @@ public class ListElement {
 
     public static ListElement invertList(ListElement head) {
         ListElement invertedListHead = new ListElement();
-        do {
+        while (head.getNextPtr() != null) {
             invertedListHead = addFirst(head.getData(), invertedListHead);
             head = next(head);
-        } while (head.getNextPtr() != null);
+        }
         invertedListHead = addFirst(head.getData(), invertedListHead);
 
         return invertedListHead;

@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Integer[] array = new Integer[]{0, 1, -5, 2, 4};
+        Integer[] array = new Integer[]{0, 1, 2, 5, -5};
         ListElement listElement = ListElement.constructListElement(array);
         listElement.printList(listElement);
 
